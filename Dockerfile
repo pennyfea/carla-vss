@@ -19,7 +19,12 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     pkg-config \
     libasound2-dev \
-    libx11-dev
+    libx11-dev \
+    x11-apps \
+    vulkan-utils \
+    mesa-vulkan-drivers \
+    libvulkan1 \
+    nvidia-driver-470
 
 RUN LC_ALL=C.UTF-8 xdg-user-dirs-update --force
 
@@ -43,6 +48,8 @@ USER carla
 
 # Set XDG_RUNTIME_DIR environment variable
 ENV XDG_RUNTIME_DIR=/tmp/runtime-carla
+# Use dummy audio driver for pygame
+ENV SDL_AUDIODRIVER=dummy  
 
 RUN mkdir -p /tmp/runtime-carla
 
